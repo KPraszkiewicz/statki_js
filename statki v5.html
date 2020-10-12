@@ -9,7 +9,6 @@
     <style>
         #morze,
         #ocean {
-
             display: flex;
             flex-wrap: wrap;
             width: 300px;
@@ -17,87 +16,86 @@
             float: left;
             margin: 40px;
             padding: 0;
-
         }
-
+        
         #morze>div,
         #ocean>div {
             border: 1px solid black;
             width: 28px;
             height: 28px;
         }
-
+        
         #start {
             display: none;
         }
-
+        
         .statek {
             background: black;
         }
-
+        
         #statki {
             float: left;
             width: 150px;
             display: flex;
             flex-direction: column;
         }
-
+        
         .okret {
             clear: both;
             padding: 5px;
         }
-
+        
         .okret>div {
             width: 25px;
             height: 25px;
             border: 1px solid black;
             float: left;
         }
-
+        
         .okretZaz>div {
             background: rgb(255, 0, 255);
         }
-
+        
         .okretWyb>div {
             background: blue;
         }
-
+        
         .poleZaz {
             background: green;
         }
-
+        
         .poleZaj {
             background: black;
         }
-
+        
         .poleNie {
             background: red;
         }
-
+        
         .postawiony {
             display: none;
         }
-
+        
         .ot {
             background: yellow;
         }
-
+        
         .pudlo {
             background-image: url("obr/pudlo.png");
             background-size: cover;
         }
-
+        
         .trafiony {
             background-image: url("obr/trafienie.png");
             background-size: cover;
             background-color: red;
         }
-        .sugestia{
+        
+        .sugestia {
             opacity: 0.5;
         }
     </style>
     <script>
-
         const N = 10
         const SUMASTATKOW = 20
 
@@ -111,13 +109,14 @@
         var polePom = []
         var trafieniaGracza = 0
         var trafieniaBota = 0
-        //var rozpoczeto = false
+            //var rozpoczeto = false
 
         function usunKlase(el, klasa) {
             if (el.className != "")
                 if (el.classList.contains(klasa))
                     el.classList.remove(klasa)
         }
+
         function generujPole() {
             let pole = []
             var tab0 = []
@@ -128,6 +127,7 @@
             }
             return pole
         }
+
         function wstawStatek(_pole, x, y, dx, dy) {
             for (let i = -1; i <= dx; i++)
                 for (let j = -1; j <= dy; j++) {
@@ -137,6 +137,7 @@
                         _pole[x + i][y + j] = 1
                 }
         }
+
         function zdejmijStatek(_pole, x, y, dx, dy) {
             for (let i = 0; i < dx; i++)
                 for (let j = 0; j < dy; j++)
@@ -171,6 +172,7 @@
             console.log(x, y)
             console.table(_pole)
         }
+
         function losujMiejsceStatku(pole, statki) {
             var x
             var y
@@ -186,30 +188,29 @@
                 do {
                     kier = Math.random()
                     test = false
-                    if (kier > 0.5) {//pion
+                    if (kier > 0.5) { //pion
                         x = Math.floor(1 + Math.random() * N)
                         y = Math.floor(1 + Math.random() * (N - stat + 1))
                         dy = stat
                         dx = 1
-                    }
-                    else {// poziom
+                    } else { // poziom
                         y = Math.floor(1 + Math.random() * N)
                         x = Math.floor(1 + Math.random() * (N - stat + 1))
                         dx = stat
                         dy = 1
                     }
                     for (let i = 0; i < stat; i++)
-                        if (kier > 0.5) {//pion
+                        if (kier > 0.5) { //pion
                             if (pole[x][y + i] != 0)
                                 test = true
-                        }
-                        else// poziom
-                            if (pole[x + i][y] != 0)
-                                test = true
+                        } else // poziom
+                    if (pole[x + i][y] != 0)
+                        test = true
                 } while (test)
                 wstawStatek(pole, x, y, dx, dy)
             }
         }
+
         function rysujRozwiazanie(pole) {
             var morze = document.getElementById("morze")
             for (let i = 1; i <= N; i++)
@@ -221,10 +222,14 @@
                     morze.appendChild(el)
                 }
         }
+
         function klik1(x, y) {
-            return function () {
+            return function() {
                 if (wybrany >= 0 && czyMozna) {
-                    let poz = { x: N, y: N }
+                    let poz = {
+                        x: N,
+                        y: N
+                    }
                     for (let ii = 1; ii <= N; ii++)
                         for (let jj = 1; jj <= N; jj++)
                             if (poleGracza[ii][jj].classList.contains("poleZaz")) {
@@ -245,12 +250,17 @@
                         listaStatkow[wybrany].classList.add("postawiony")
                         wybrany = -1
                     }
-                }
-                else if (wybrany == -1) {
+                } else if (wybrany == -1) {
                     if (polePom[x][y] == 2) {
                         usunKlase(poleGracza[x][y], "poleZaj")
-                        let poz = { x: x, y: y }
-                        let dl = { x: 1, y: 1 };
+                        let poz = {
+                            x: x,
+                            y: y
+                        }
+                        let dl = {
+                            x: 1,
+                            y: 1
+                        };
                         let k = -1;
                         while (polePom[x + k][y] == 2) {
                             usunKlase(poleGracza[x + k][y], "poleZaj")
@@ -288,8 +298,7 @@
                                 listaStatkow[wsk].classList.remove("postawiony")
                                 wybrany = wsk
                                 break
-                            }
-                            else
+                            } else
                                 wsk++
                         }
                     }
@@ -297,12 +306,13 @@
                 rozpoczecie()
             }
         }
+
         function najechanie1(x, y) {
-            return function () {
+            return function() {
                 if (wybrany >= 0) {
                     czyMozna = true;
                     this.classList.add("poleZaz")
-                    //console.log(statkiGracza[wybrany])
+                        //console.log(statkiGracza[wybrany])
                     let tmpS;
                     let tmpL;
                     for (let k = 0; k < statkiGracza[wybrany]; k++) {
@@ -310,33 +320,32 @@
                             if (x + k > N) {
                                 tmpS = poleGracza[N - k][y]
                                 tmpL = polePom[N - k][y]
-                            }
-                            else {
+                            } else {
                                 tmpS = poleGracza[x + k][y]
                                 tmpL = polePom[x + k][y]
                             }
                         else
-                            if (y + k > N) {
-                                tmpS = poleGracza[x][N - k]
-                                tmpL = polePom[x][N - k]
-                            }
-                            else {
-                                tmpS = poleGracza[x][y + k]
-                                tmpL = polePom[x][y + k]
-                            }
+                        if (y + k > N) {
+                            tmpS = poleGracza[x][N - k]
+                            tmpL = polePom[x][N - k]
+                        } else {
+                            tmpS = poleGracza[x][y + k]
+                            tmpL = polePom[x][y + k]
+                        }
 
-                        if (/*tmpS.classList.contains("poleZaj")||*/tmpL > 0) {
+                        if ( /*tmpS.classList.contains("poleZaj")||*/ tmpL > 0) {
                             tmpS.classList.add("poleNie")
                             czyMozna = false;
                         } else
                             tmpS.classList.add("poleZaz")
-                        //console.log(czyMozna)
+                            //console.log(czyMozna)
                     }
                 }
             }
         }
+
         function wyjechanie1() {
-            return function () {
+            return function() {
                 for (let ii = 1; ii <= N; ii++)
                     for (let jj = 1; jj <= N; jj++) {
                         poleGracza[ii][jj].classList.remove("poleZaz")
@@ -345,9 +354,10 @@
             }
         }
 
-        function zatop(_pole,x,y){
+        function zatop(_pole, x, y) {
 
         }
+
         function strzalGracza(e) {
             if (!czyMozna) {
                 alert("poczekaj")
@@ -355,7 +365,10 @@
             }
             console.log(e.target)
             el = e.target;
-            poz = { x: el.className.split("_")[1], y: el.className.split("_")[2] }
+            poz = {
+                x: el.className.split("_")[1],
+                y: el.className.split("_")[2]
+            }
             console.log(poz)
             if (pole[poz.x][poz.y] == 2) {
                 el.classList.add("trafiony")
@@ -374,8 +387,11 @@
             //     console.log("Coś jest nie tak.")
 
             el.onclick = null
-            setTimeout(() => { strzalBota();  }, 1000)
+            setTimeout(() => {
+                strzalBota();
+            }, 1000)
         }
+
         function strzalBota() {
             let x = Math.floor((Math.random() * 10) + 1);
             let y = Math.floor((Math.random() * 10) + 1);
@@ -398,7 +414,7 @@
             polePom = generujPole()
             poleGracza = generujPole()
             var ocean = document.getElementById("ocean")
-            ocean.oncontextmenu = function (e) {
+            ocean.oncontextmenu = function(e) {
                 pion = !pion
                 e.target.onmouseout()
                 e.target.onmouseover()
@@ -417,6 +433,7 @@
             }
             //console.log(poleGracza)
         }
+
         function rysujPustePoleKom() {
             var morze = document.getElementById("morze")
             pole = generujPole();
@@ -429,6 +446,7 @@
                 }
             }
         }
+
         function listujStatki(_statki) {
             var panel = document.getElementById("statki")
             for (let i = _statki.length - 1; i >= 0; i--) {
@@ -436,20 +454,19 @@
                 okret.className = "okret"
                 for (let j = _statki[i]; j > 0; j--) {
                     let el = document.createElement("div")
-                    el.onmouseover = function () {
+                    el.onmouseover = function() {
                         this.parentElement.classList.add("okretZaz")
                     }
-                    el.onmouseout = function () {
+                    el.onmouseout = function() {
                         this.parentElement.classList.remove("okretZaz")
                     }
-                    el.onclick = function () {
+                    el.onclick = function() {
                         if (wybrany >= 0)
                             listaStatkow[wybrany].classList.remove("okretWyb")
                         if (wybrany != i) {
                             wybrany = i;
                             this.parentElement.classList.add("okretWyb")
-                        }
-                        else
+                        } else
                             wybrany = -1;
                         console.log(wybrany)
                     }
@@ -473,7 +490,7 @@
 
             if (!jeszczeNie) {
                 przyciskStart.style.display = "block"
-                przyciskStart.onclick = function () {
+                przyciskStart.onclick = function() {
                     document.getElementById("ocean").oncontextmenu = null
                     for (let i = 1; i <= N; i++)
                         for (let j = 1; j <= N; j++) {
@@ -484,7 +501,7 @@
                         }
 
                     let morze = document.getElementById("morze").children
-                    //console.log(morze)
+                        //console.log(morze)
                     for (let i = 0; i < N * N; i++) {
                         morze[i].onclick = strzalGracza;
                     }
@@ -499,7 +516,6 @@
             listujStatki(statkiGracza);
             rysujPustePoleKom()
         }
-
     </script>
 </head>
 
