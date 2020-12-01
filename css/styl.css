@@ -1,0 +1,45 @@
+body {
+    background: darkolivegreen;
+}
+
+#nag {
+    text-align: center;
+    font-size: 3vw;
+    margin:2vw;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#statki {
+    border: 1px solid black;
+    display: inline;
+}
+
+#plansze {
+    text-align: center;
+    padding: 3vw;
+}
+
+#test {
+    width: 100vw;
+    height: 500px;
+    background: chartreuse;
+}
+
+#t1 {
+    box-sizing: border-box;
+    display:  inline-block;
+    width: 10vw;
+    margin: 3vw;
+    height: 200px;
+    background-color: cornsilk;
+}
+
+#t2,#t3 {
+    display: inline-block;
+    box-sizing: border-box;
+    width:35vw;
+    margin: 3vw;
+    height: 35vw;
+    background-color: chocolate;
+}

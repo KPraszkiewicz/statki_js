@@ -1,0 +1,98 @@
+#morze,
+#ocean {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 35vw;
+    height: 35vw;
+}
+
+#morze>div,
+#ocean>div {
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 10%;
+    height: 10%;
+}
+
+#start {
+    display: none;
+}
+
+.statek {
+    background: black;
+}
+
+#statki {
+    float: left;
+    width: 10vw;
+}
+
+.okret {
+    clear: both;
+    margin: 1vw;
+    height: 2vw;
+}
+
+.o4{
+    width: 8vw;
+}
+.o3{
+    width: 60%;
+}
+.o2{
+    width: 40%;
+}
+.o1{
+    width: 20%;
+}
+
+.okret>div {
+    box-sizing: border-box;
+    width: 2vw;
+    height: 100%;
+    border: 1px solid black;
+    float: left;
+}
+
+.okretZaz>div {
+    background: rgb(255, 0, 255);
+}
+
+.okretWyb>div {
+    background: blue;
+}
+
+.poleZaz {
+    background: green;
+}
+
+.poleZaj {
+    background: black;
+}
+
+.poleNie {
+    background: red;
+}
+
+.postawiony {
+    display: none;
+}
+
+.ot {
+    background: yellow;
+}
+
+.pudlo {
+    background-image: url("../obr/pudlo.png");
+    background-size: cover;
+}
+
+.trafiony {
+    background-image: url("../obr/trafienie.png");
+    background-size: cover;
+    background-color: red;
+}
+
+.sugestia {
+    opacity: 0.5;
+}
